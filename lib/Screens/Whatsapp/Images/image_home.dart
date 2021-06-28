@@ -2,10 +2,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:video_saver/Screens/Whatsapp/Images/image_view.dart';
 import 'package:video_saver/Styles/colors.dart';
 import 'package:video_saver/Utils/build_message_widget.dart';
 import 'package:video_saver/Utils/external_app_launcher.dart';
 import 'package:video_saver/Utils/getLocalPath.dart';
+import 'package:video_saver/Utils/page_router.dart';
 
 class ImageHomePage extends StatefulWidget {
   @override
@@ -74,17 +76,29 @@ class _ImageHomePageState extends State<ImageHomePage> {
                       final image = file[index].path;
 
                       ///Return Widget
-                      return Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(color: MyColors().green),
-                            color: Colors.transparent,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15))),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.all(Radius.circular(15)),
-                          child: Image.file(
-                            File(image),
-                            fit: BoxFit.cover,
+                      return InkWell(
+                        onTap: () {
+                          PageRouter(ctx: context).nextPage(
+                              page: ImageViewPage(
+                            tag: index.toString(),
+                            image: image,
+                          ));
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(color: MyColors().green),
+                              color: Colors.transparent,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15))),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.all(Radius.circular(15)),
+                            child: Hero(
+                              tag: index.toString(),
+                              child: Image.file(
+                                File(image),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                           ),
                         ),
                       );
@@ -94,23 +108,6 @@ class _ImageHomePageState extends State<ImageHomePage> {
                     },
                   ),
                 ),
-      // : ListView(
-      //     children: List.generate(
-      //       file.length,
-      //       (index) {
-      //         final image = file[index].path;
-      //
-      //         //get extension : Only Show Images here
-      //         final ext =
-      //             image.contains(".mp4") || image.contains(".nomedia");
-      //
-      //         if (ext) {
-      //           return Text("");
-      //         }
-      //         return Image.file(File(image));
-      //       },
-      //     ),
-      //   ),
     );
   }
 }

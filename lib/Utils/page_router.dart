@@ -8,7 +8,7 @@ class PageRouter {
 
   ///Navigate to next page
   void nextPage({Widget? page}) {
-    Navigator.push(ctx!, CupertinoPageRoute(builder: (_) => page!));
+    Navigator.push(ctx!, MaterialPageRoute(builder: (_) => page!));
   }
 
   ///Navigate to next page and remove previous page

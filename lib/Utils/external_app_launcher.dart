@@ -32,4 +32,15 @@ class FlutterNativeAPI {
       print("Failed to get battery level: '${e.message}'.");
     }
   }
+
+  getVideoThumbNail(String? image) async {
+    try {
+      final result =
+          await platform.invokeMethod("videoThumbNail", {"image": image});
+      print(" ======== $result");
+      return result;
+    } catch (e) {
+      print("Erorororoororo $e");
+    }
+  }
 }

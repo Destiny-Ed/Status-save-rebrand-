@@ -2,14 +2,19 @@ package com.destinyed.video_saver
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.media.ThumbnailUtils
 import android.net.Uri
+import android.provider.MediaStore
 import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.print.PrintHelper
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
+import java.io.File
+import java.io.FileOutputStream
 
 class MainActivity : FlutterActivity() {
 
@@ -38,6 +43,11 @@ class MainActivity : FlutterActivity() {
 
                     shareImage(image!!)
                 }
+                "videoThumbNail" -> {
+                    val image = call.argument<String>("image");
+                    var video = ThumbnailUtils.createVideoThumbnail(image!!, MediaStore.Images.Thumbnails.MICRO_KIND)
+                    result.success(video);
+                }
                 else -> {
                     result.notImplemented();
                 }
@@ -58,6 +68,8 @@ class MainActivity : FlutterActivity() {
 
         }
     }
+
+
 
 
     //Open Playstore if user does not have the app install
@@ -95,4 +107,5 @@ class MainActivity : FlutterActivity() {
             it.printBitmap(imageTitle!!, bitmap)
         }
     }
+    
 }
