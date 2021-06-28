@@ -43,6 +43,11 @@ class MainActivity : FlutterActivity() {
 
                     shareImage(image!!)
                 }
+                "shareVideo" -> {
+                    val video = call.argument<String>("video")
+
+                    share_video(video);
+                }
                 "videoThumbNail" -> {
                     val image = call.argument<String>("image");
                     var video = ThumbnailUtils.createVideoThumbnail(image!!, MediaStore.Images.Thumbnails.MICRO_KIND)
@@ -97,6 +102,14 @@ class MainActivity : FlutterActivity() {
 
         intent.putExtra(Intent.EXTRA_STREAM, Uri.parse(image))
         startActivity(Intent.createChooser(intent, "Share Image"))
+    }
+
+    private fun share_video(video: String?) {
+        var intent = Intent(Intent.ACTION_SEND)
+        intent.type = "video/*"
+
+        intent.putExtra(Intent.EXTRA_STREAM, Uri.parse(video))
+        startActivity(Intent.createChooser(intent, "Share Video via..."))
     }
 
     private fun printImage(imageUri: String?, imageTitle: String?) {

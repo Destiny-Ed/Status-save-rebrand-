@@ -32,6 +32,17 @@ class FlutterNativeAPI {
       print("Failed to get battery level: '${e.message}'.");
     }
   }
+//shareVideo
+
+  void shareVideo(String? video) async {
+    try {
+      final int result =
+          await platform.invokeMethod('shareVideo', {"video": video});
+      print(result);
+    } on PlatformException catch (e) {
+      print("Failed to get battery level: '${e.message}'.");
+    }
+  }
 
   getVideoThumbNail(String? image) async {
     try {

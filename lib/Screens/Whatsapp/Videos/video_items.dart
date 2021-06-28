@@ -1,8 +1,10 @@
 import 'dart:io';
-
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:video_player/video_player.dart';
+import 'package:video_saver/Styles/colors.dart';
+import 'package:video_saver/Utils/external_app_launcher.dart';
 
 class VideoItems extends StatefulWidget {
   final String? video;
@@ -53,8 +55,43 @@ class _VideoItemsState extends State<VideoItems> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey,
       body: Chewie(
         controller: _chewieController!,
+      ),
+      floatingActionButton: Container(
+        margin: const EdgeInsets.only(bottom: 20.0, left: 25.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            FloatingActionButton(
+              heroTag: "btn1",
+              onPressed: () async {
+                ///Download Video to Local Directory
+                ///
+                await ImageGallerySaver.saveFile(widget.video!).then((value) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      backgroundColor: MyColors().green,
+                      content: Text(
+                        "Video Saved Successfully",
+                        style: TextStyle(color: MyColors().white),
+                      ),
+                    ),
+                  );
+                });
+              },
+              child: Icon(Icons.download_rounded),
+            ),
+            FloatingActionButton(
+              heroTag: "btn2",
+              onPressed: () {
+                FlutterNativeAPI().shareVideo(widget.video);
+              },
+              child: Icon(Icons.share),
+            ),
+          ],
+        ),
       ),
     );
   }
