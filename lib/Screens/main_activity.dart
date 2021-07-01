@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:video_saver/Styles/colors.dart';
-
 import 'BottomNavPages/wSaver.dart';
+import 'MusicDownloader/Music/music_home_page.dart';
 
 class MainActivity extends StatefulWidget {
   @override
@@ -18,7 +18,7 @@ class _MainActivityState extends State<MainActivity> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: MyColors().green,
-        title: Text("Status Downloader"),
+        title: Text("Downloader"),
         elevation: 0,
       ),
       body: _buildBody[_currentIndex],
@@ -38,7 +38,7 @@ class _MainActivityState extends State<MainActivity> {
 
   final List<Widget> _buildBody = [
     WSaverHome(),
-    WSaverHome(), //NewsFeed
+    MMusicHome(), //NewsFeed
     WSaverHome(), //Settings
   ];
 
@@ -49,9 +49,9 @@ class _MainActivityState extends State<MainActivity> {
       text: "Wsaver",
     ),
     GButton(
-      icon: Icons.fiber_new_sharp,
+      icon: Icons.my_library_music,
       gap: 5.0,
-      text: "News Feed",
+      text: "MSaver",
     ),
     GButton(
       icon: Icons.settings,

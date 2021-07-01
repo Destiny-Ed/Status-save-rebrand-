@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:video_saver/Screens/Whatsapp/Images/image_home.dart';
-import 'package:video_saver/Screens/Whatsapp/Saved/saved_home_page.dart';
+import 'package:video_saver/Screens/Whatsapp/Stickers/sticker_home_page.dart';
 import 'package:video_saver/Screens/Whatsapp/Videos/video_home_page.dart';
 import 'package:video_saver/Styles/colors.dart';
 
@@ -65,9 +65,9 @@ class _WSaverHomeState extends State<WSaverHome>
 
   final List<Widget> _tabBody = [
     ImageHomePage(),
-    VideoHomePage(),
-    SavedHomePage(),
+    VideoHomePage(path: "Hello"),
+    StickerHomePage(),
   ];
 
-  final List<String?> _tabText = ["Images", "Videos", "Saved"];
+  final List<String?> _tabText = ["Images", "Videos", "Stickers"];
 }

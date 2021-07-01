@@ -44,10 +44,10 @@ class FlutterNativeAPI {
     }
   }
 
-  getVideoThumbNail(String? image) async {
+  getVideoThumbNail(String? video) async {
     try {
       final result =
-          await platform.invokeMethod("videoThumbNail", {"image": image});
+          await platform.invokeMethod("videoThumbNail", {"video": video});
       print(" ======== $result");
       return result;
     } catch (e) {

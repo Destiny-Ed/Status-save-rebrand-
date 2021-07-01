@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -11,12 +12,18 @@ import 'package:video_saver/Utils/page_router.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 
 class VideoHomePage extends StatefulWidget {
+  String? path;
+
+  VideoHomePage({this.path});
+
   @override
   _VideoHomePageState createState() => _VideoHomePageState();
 }
 
 class _VideoHomePageState extends State<VideoHomePage> {
-  List<VideoModel> data = [];
+  List<Map<String, dynamic>> data = []..reversed;
+
+  // Uint8List? thumb;
 
   @override
   void initState() {
@@ -34,15 +41,27 @@ class _VideoHomePageState extends State<VideoHomePage> {
     return Scaffold(
       body: data.isEmpty
           ? Center(
-              child: CircularProgressIndicator(),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(
+                    color: MyColors().green,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text("Checking new status...")
+                ],
+              ),
             )
-          : data.length == 0
+          : data.length < 1
               ? buildMessageWidget(() {
                   ///Launch whatsapp to view users status
                   FlutterNativeAPI().launchExternalApp("com.whatsapp");
                 }, "View Video", "You have zero viewed status",
                   Icon(Icons.hourglass_empty_rounded), context)
               : Container(
+                  color: MyColors().green,
                   padding: const EdgeInsets.all(10.0),
                   child: StaggeredGridView.countBuilder(
                     crossAxisCount: 2,
@@ -50,9 +69,10 @@ class _VideoHomePageState extends State<VideoHomePage> {
                     mainAxisSpacing: 12,
                     itemCount: data.length,
                     itemBuilder: (context, index) {
-                      final video = data[index].path;
+                      print(data[index]);
+                      final video = data[index]["video_path"];
 
-                      final thumbNail = data[index].thumbnail;
+                      final thumbNail = data[index]["thumbnail"];
 
                       ///Return Widget
                       return InkWell(
@@ -67,18 +87,22 @@ class _VideoHomePageState extends State<VideoHomePage> {
                         child: Stack(
                           children: [
                             Container(
+                              width: double.infinity,
+                              height: double.infinity,
                               decoration: BoxDecoration(
-                                  border: Border.all(color: MyColors().green),
+                                  border: Border.all(color: MyColors().white),
                                   color: Colors.transparent,
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(15))),
                               child: ClipRRect(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(15)),
-                                child: Image.memory(
-                                  thumbNail!,
-                                  fit: BoxFit.cover,
-                                ),
+                                child: thumbNail == null
+                                    ? Text("Loading...")
+                                    : Image.memory(
+                                        thumbNail,
+                                        fit: BoxFit.cover,
+                                      ),
                               ),
                             ),
 

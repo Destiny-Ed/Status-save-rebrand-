@@ -6,9 +6,13 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.media.ThumbnailUtils
 import android.net.Uri
+import android.os.Build
+import android.os.CancellationSignal
 import android.provider.MediaStore
+import android.util.Size
 import android.widget.Toast
 import androidx.annotation.NonNull
+import androidx.annotation.RequiresApi
 import androidx.print.PrintHelper
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
@@ -21,6 +25,7 @@ class MainActivity : FlutterActivity() {
     private val CHANNEL = "com.nativeAPI"
 
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler { call, result ->
@@ -49,9 +54,9 @@ class MainActivity : FlutterActivity() {
                     share_video(video);
                 }
                 "videoThumbNail" -> {
-                    val image = call.argument<String>("image");
-                    var video = ThumbnailUtils.createVideoThumbnail(image!!, MediaStore.Images.Thumbnails.MICRO_KIND)
-                    result.success(video);
+                    val video = call.argument<String>("video");
+                    var s = ThumbnailUtils.createVideoThumbnail(video.toString(), MediaStore.Images.Thumbnails.MICRO_KIND)
+                    result.success(s);
                 }
                 else -> {
                     result.notImplemented();

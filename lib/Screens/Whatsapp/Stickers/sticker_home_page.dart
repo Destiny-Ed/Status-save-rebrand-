@@ -9,12 +9,12 @@ import 'package:video_saver/Utils/external_app_launcher.dart';
 import 'package:video_saver/Utils/getLocalPath.dart';
 import 'package:video_saver/Utils/page_router.dart';
 
-class ImageHomePage extends StatefulWidget {
+class StickerHomePage extends StatefulWidget {
   @override
-  _ImageHomePageState createState() => _ImageHomePageState();
+  _StickerHomePageState createState() => _StickerHomePageState();
 }
 
-class _ImageHomePageState extends State<ImageHomePage> {
+class _StickerHomePageState extends State<StickerHomePage> {
   //Declare Globaly
   String? directory;
   List<FileSystemEntity> file = []..reversed;
@@ -32,20 +32,20 @@ class _ImageHomePageState extends State<ImageHomePage> {
     if (status.isDenied) {
       Permission.storage.request();
       // We didn't ask for permission yet or the permission has been denied before but not permanently.
-      directory = await GetLocalFilePath().getLocalPath(true).then((value) {
+      directory = await GetLocalFilePath().getLocalPath(false).then((value) {
         if (mounted) {
           setState(() {
             file.addAll(value.listSync().where((element) =>
-                element.path.endsWith(".jpg"))); //Add Files to fileList
+                element.path.endsWith(".webp"))); //Add Files to fileList
           });
         }
       });
     } else {
-      directory = await GetLocalFilePath().getLocalPath(true).then((value) {
+      directory = await GetLocalFilePath().getLocalPath(false).then((value) {
         if (mounted) {
           setState(() {
             file.addAll(value.listSync().where((element) =>
-                element.path.endsWith(".jpg"))); //Add Files to fileList
+                element.path.endsWith(".webp"))); //Add Files to fileList
           });
         }
       });

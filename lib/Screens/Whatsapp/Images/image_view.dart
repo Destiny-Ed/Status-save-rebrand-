@@ -7,8 +7,10 @@ import 'package:video_saver/Utils/external_app_launcher.dart';
 import 'package:video_saver/Utils/getLocalPath.dart';
 
 class ImageViewPage extends StatefulWidget {
-  ImageViewPage({this.tag, this.image});
+  ImageViewPage(this.index, {this.file, this.tag, this.image});
 
+  int? index;
+  List<FileSystemEntity>? file;
   String? image;
   String? tag;
 
@@ -17,14 +19,39 @@ class ImageViewPage extends StatefulWidget {
 }
 
 class _ImageViewPageState extends State<ImageViewPage> {
+  PageController? _controller;
+
+  int? currentIndex;
+
+  @override
+  void initState() {
+    _controller = PageController(initialPage: widget.index!)
+      ..addListener(() {
+        setState(() {
+          currentIndex = _controller!.page!.toInt();
+          print(currentIndex);
+        });
+      });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Hero(
           tag: widget.tag!,
-          child: Image.file(
-            File(widget.image!),
+          // child: Image.file(
+          //   File(widget.image!),
+          // ),
+          child: PageView(
+            controller: _controller,
+            children: List.generate(
+              widget.file!.length,
+              (index) => Image.file(
+                File(widget.file![index].path),
+              ),
+            ),
           ),
         ),
       ),
@@ -37,7 +64,9 @@ class _ImageViewPageState extends State<ImageViewPage> {
               onPressed: () async {
                 ///Download Image to Local Directory
                 ///
-                await ImageGallerySaver.saveFile(widget.image!).then((value) {
+                await ImageGallerySaver.saveFile(
+                        widget.file![_controller!.page!.toInt()].path)
+                    .then((value) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       backgroundColor: MyColors().green,
@@ -58,7 +87,9 @@ class _ImageViewPageState extends State<ImageViewPage> {
               heroTag: "btn2",
               onPressed: () {
                 ///Show the android print manager API
-                FlutterNativeAPI().printImage(widget.image!, widget.image!);
+                FlutterNativeAPI().printImage(
+                    widget.file![_controller!.page!.toInt()].path,
+                    widget.file![_controller!.page!.toInt()].path);
               },
               child: Icon(Icons.print),
             ),
@@ -67,7 +98,8 @@ class _ImageViewPageState extends State<ImageViewPage> {
               heroTag: "btn3",
               onPressed: () {
                 ///Share Image to any Sharable Application
-                FlutterNativeAPI().shareImage(widget.image!);
+                FlutterNativeAPI()
+                    .shareImage(widget.file![_controller!.page!.toInt()].path);
               },
               child: Icon(Icons.share),
             ),

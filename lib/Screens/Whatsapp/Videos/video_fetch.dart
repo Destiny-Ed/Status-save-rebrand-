@@ -1,17 +1,21 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:permission_handler/permission_handler.dart';
 import 'package:video_saver/Screens/Whatsapp/Videos/video_model.dart';
+import 'package:video_saver/Utils/external_app_launcher.dart';
 import 'package:video_saver/Utils/getLocalPath.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 
 class FetchVideo {
-  List<VideoModel> arrVideo = <VideoModel>[];
+  List<Map<String, dynamic>> arrVideo = [];
 
-  Future<List<VideoModel>> listofFiles() async {
+  Future<List<Map<String, dynamic>>> listofFiles() async {
     var status = await Permission.storage.request();
     if (status.isDenied) {
       Permission.storage.request();
       // We didn't ask for permission yet or the permission has been denied before but not permanently.
-      await GetLocalFilePath().getLocalPath().then((value) async {
+      await GetLocalFilePath().getLocalPath(true).then((value) async {
         // if (mounted) {
         //   setState(() {
         //     file.addAll(value.listSync().where((element) =>
@@ -22,34 +26,34 @@ class FetchVideo {
             value.listSync().where((element) => element.path.endsWith(".mp4"));
 
         for (var data in list) {
-          final s = data.path;
+          final videoPath = data.path;
 
-          final thumbnail = await VideoThumbnail.thumbnailData(video: s);
+          // final s = await FlutterNativeAPI().getVideoThumbNail(videoPath);
 
-          final video = VideoModel(thumbnail: thumbnail!, path: s);
+          final thumbnail =
+              await VideoThumbnail.thumbnailData(video: videoPath);
 
-          arrVideo.add(video);
+          final mapOfVideo = {"thumbnail": thumbnail, "video_path": videoPath};
+
+          arrVideo.add(mapOfVideo);
         }
       });
     } else {
-      await GetLocalFilePath().getLocalPath().then((value) async {
-        // if (mounted) {
-        //   setState(() {
-        //     file.addAll(value.listSync().where((element) =>
-        //         element.path.endsWith(".mp4"))); //Add Files to fileList
-        //   });
-        // }
+      await GetLocalFilePath().getLocalPath(true).then((value) async {
         var list =
             value.listSync().where((element) => element.path.endsWith(".mp4"));
 
         for (var data in list) {
-          final s = data.path;
+          final videoPath = data.path;
 
-          final thumbnail = await VideoThumbnail.thumbnailData(video: s);
+          // final s = await FlutterNativeAPI().getVideoThumbNail(videoPath);
 
-          final video = VideoModel(thumbnail: thumbnail!, path: s);
+          final thumbnail =
+              await VideoThumbnail.thumbnailData(video: videoPath);
 
-          arrVideo.add(video);
+          final mapOfVideo = {"thumbnail": thumbnail, "video_path": videoPath};
+
+          arrVideo.add(mapOfVideo);
         }
       });
     }

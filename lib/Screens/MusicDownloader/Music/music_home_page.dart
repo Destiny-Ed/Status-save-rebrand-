@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
-import 'package:video_saver/Styles/colors.dart';
 
-class SavedHomePage extends StatefulWidget {
+import 'audiomack.dart';
+import 'boom_play.dart';
+
+class MMusicHome extends StatefulWidget {
   @override
-  _SavedHomePageState createState() => _SavedHomePageState();
+  _MMusicHomeState createState() => _MMusicHomeState();
 }
 
-class _SavedHomePageState extends State<SavedHomePage> {
+class _MMusicHomeState extends State<MMusicHome> {
   int _selectedTab = 0;
 
   @override
@@ -36,9 +37,10 @@ class _SavedHomePageState extends State<SavedHomePage> {
             // backgroundColor: MyColors().green,
           ),
         ),
+        body: TabBarView(children: [BoomHomePage(), AudioMarkHomePage()]),
       ),
     );
   }
 
-  final List<String?> _tabText = ["Saved Images", "Saved Videos"];
+  final List<String?> _tabText = ["Boom player music", "Audio mark Music"];
 }
