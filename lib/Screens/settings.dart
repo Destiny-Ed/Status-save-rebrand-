@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:video_saver/Constants/adsView.dart';
 import 'package:video_saver/Styles/colors.dart';
 import 'package:video_saver/Utils/external_app_launcher.dart';
 import 'package:share/share.dart';
@@ -20,13 +21,13 @@ class SettingsPage extends StatelessWidget {
           ///Share App
           settingWidget("Share App", Icon((Icons.share)), () {
             final String text =
-                "I use HAVE to download whatsApp status, boomplay and audiomack songs without spending a dime  https://play.google.com/store/apps/details?id=com.destinyed.statussaverpro";
+                "I use HaveIt to download whatsApp status, boomplay and audiomack songs without spending a dime  https://play.google.com/store/apps/details?id=com.destinyed.statussaverpro";
             Share.share(text);
           }),
 
           ///Rate the app
           ///
-          settingWidget("Rate Have | Show some love", Icon((Icons.star_rate)),
+          settingWidget("Rate HaveIt | Show some love", Icon((Icons.star_rate)),
               () async {
             // FlutterNativeAPI()
             //     .launchExternalApp("com.destinyed.statussaverpro");
@@ -36,6 +37,9 @@ class SettingsPage extends StatelessWidget {
                 ? await launch(url)
                 : throw 'Could not launch $url';
           }),
+
+          ///Ads
+          BannerAdsView(),
 
           ///Current app version
         ],

@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:provider/provider.dart';
+import 'package:video_saver/Constants/ads_helper.dart';
 import 'package:video_saver/Constants/instertitialAdsView.dart';
 import 'package:video_saver/Styles/colors.dart';
 import 'package:video_saver/Utils/external_app_launcher.dart';
@@ -34,94 +36,83 @@ class _ImageViewPageState extends State<ImageViewPage> {
           print(currentIndex);
         });
       });
+
+    loadInterstitialAd();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<IntertitialAds>(builder: (context, interstitial, child) {
-      ///Load Interstitial Ads
-      interstitial.loadInterstitialAd();
-
-      ///
-      ///Show the ads after 3 seconds if page is still active
-      Future.delayed(const Duration(seconds: 3), () {
-        if (interstitial.isInterstitialAdReady == true) {
-          interstitial.interstitialAd.show();
-        }
-      });
-
-      ///Return Body Widget Here
-      return Scaffold(
-        body: Center(
-          child: Hero(
-            tag: widget.tag!,
-            // child: Image.file(
-            //   File(widget.image!),
-            // ),
-            child: PageView(
-              controller: _controller,
-              children: List.generate(
-                widget.file!.length,
-                (index) => Image.file(
-                  File(widget.file![index].path),
-                ),
+    ///Return Body Widget Here
+    return Scaffold(
+      body: Center(
+        child: Hero(
+          tag: widget.tag!,
+          // child: Image.file(
+          //   File(widget.image!),
+          // ),
+          child: PageView(
+            controller: _controller,
+            children: List.generate(
+              widget.file!.length,
+              (index) => Image.file(
+                File(widget.file![index].path),
               ),
             ),
           ),
         ),
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.only(left: 30.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              FloatingActionButton(
-                onPressed: () async {
-                  ///Download Image to Local Directory
-                  ///
-                  await ImageGallerySaver.saveFile(
-                          widget.file![_controller!.page!.toInt()].path)
-                      .then((value) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        backgroundColor: MyColors().green,
-                        content: Text(
-                          "Image Saved Successfully",
-                          style: TextStyle(color: MyColors().white),
-                        ),
+      ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(left: 30.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            FloatingActionButton(
+              onPressed: () async {
+                ///Download Image to Local Directory
+                ///
+                await ImageGallerySaver.saveFile(
+                        widget.file![_controller!.page!.toInt()].path)
+                    .then((value) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      backgroundColor: MyColors().green,
+                      content: Text(
+                        "Image Saved Successfully",
+                        style: TextStyle(color: MyColors().white),
                       ),
-                    );
-                  });
-                },
-                tooltip: "Download Image",
-                heroTag: "btn1",
-                child: Icon(Icons.download_rounded),
-              ),
-              FloatingActionButton(
-                tooltip: "Print Image",
-                heroTag: "btn2",
-                onPressed: () {
-                  ///Show the android print manager API
-                  FlutterNativeAPI().printImage(
-                      widget.file![_controller!.page!.toInt()].path,
-                      widget.file![_controller!.page!.toInt()].path);
-                },
-                child: Icon(Icons.print),
-              ),
-              FloatingActionButton(
-                tooltip: "Share Image",
-                heroTag: "btn3",
-                onPressed: () {
-                  ///Share Image to any Sharable Application
-                  FlutterNativeAPI().shareImage(
-                      widget.file![_controller!.page!.toInt()].path);
-                },
-                child: Icon(Icons.share),
-              ),
-            ],
-          ),
+                    ),
+                  );
+                });
+              },
+              tooltip: "Download Image",
+              heroTag: "btn1",
+              child: Icon(Icons.download_rounded),
+            ),
+            FloatingActionButton(
+              tooltip: "Print Image",
+              heroTag: "btn2",
+              onPressed: () {
+                ///Show the android print manager API
+                FlutterNativeAPI().printImage(
+                    widget.file![_controller!.page!.toInt()].path,
+                    widget.file![_controller!.page!.toInt()].path);
+              },
+              child: Icon(Icons.print),
+            ),
+            FloatingActionButton(
+              tooltip: "Share Image",
+              heroTag: "btn3",
+              onPressed: () {
+                ///Share Image to any Sharable Application
+                FlutterNativeAPI()
+                    .shareImage(widget.file![_controller!.page!.toInt()].path);
+              },
+              child: Icon(Icons.share),
+            ),
+          ],
         ),
-      );
-    });
+      ),
+    );
   }
 }

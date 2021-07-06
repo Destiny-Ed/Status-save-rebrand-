@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
 
    <application
-        android:label="video_saver"
+        android:label="HaveIt"
         android:icon="@mipmap/ic_launcher"
         android:requestLegacyExternalStorage="true">
         <activity
@@ -43,7 +43,7 @@
 
        <meta-data
            android:name="com.google.android.gms.ads.APPLICATION_ID"
-           android:value="ca-app-pub-4655432953203287~5280163834"/>
+           android:value="ca-app-pub-1320195383145171~7394496752"/>
 
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->

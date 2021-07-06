@@ -46,14 +46,7 @@ class _VideoItemsState extends State<VideoItems> {
       },
     );
 
-    ///Load Interstitial Ads
-    IntertitialAds().loadInterstitialAd();
-
-    ///
-    ///Show the ads after 3 seconds if page is still active
-    if (IntertitialAds().isInterstitialAdReady == true) {
-      IntertitialAds().interstitialAd.show();
-    }
+    loadInterstitialAd();
   }
 
   @override

@@ -4,6 +4,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:video_saver/Constants/adsView.dart';
 import 'package:video_saver/Constants/file_path.dart';
 import 'package:video_saver/Screens/Whatsapp/Images/image_view.dart';
 import 'package:video_saver/Styles/colors.dart';
@@ -105,59 +106,68 @@ class _BoomHomePageState extends State<BoomHomePage> {
                         .launchExternalApp("com.afmobi.boomplayer");
                   }, "View boomplayer", "You have zero boom player music",
                     Icon(Icons.hourglass_empty_rounded), context)
-                : ListView(
-                    children: List.generate(file.length, (index) {
-                      ///Music to play
-                      final audioFile = file[index].path;
+                : Column(
+                    children: [
+                      BannerAdsView(),
+                      Expanded(
+                        child: ListView(
+                          children: List.generate(file.length, (index) {
+                            ///Music to play
+                            final audioFile = file[index].path;
 
-                      ///Music title to display
-                      final music = file[index]
-                          .path
-                          .replaceAll(".bp", ".mp3")
-                          .replaceRange(0, 51, "");
-                      return Card(
-                        elevation: 8.0,
-                        shadowColor: MyColors().green,
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(vertical: 10.0),
-                          child: ListTile(
-                            trailing: InkWell(
-                              onTap: () {
-                                ///Download music
+                            ///Music title to display
+                            final music = file[index]
+                                .path
+                                .replaceAll(".bp", ".mp3")
+                                .replaceRange(0, 51, "");
+                            return Card(
+                              elevation: 8.0,
+                              shadowColor: MyColors().green,
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10.0),
+                                child: ListTile(
+                                  trailing: InkWell(
+                                    onTap: () {
+                                      ///Download music
 
-                                GetLocalFilePath()
-                                    .moveFile(File(audioFile),
-                                        "/storage/emulated/0/VideoSaver/$music")
-                                    .then((value) {
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
-                                    backgroundColor: MyColors().green,
-                                    content: Text(
-                                      "Music Saved to $value",
-                                      style: TextStyle(color: MyColors().white),
-                                    ),
-                                  ));
-                                });
-                              },
-                              child: CircleAvatar(
-                                  backgroundColor: MyColors().green,
-                                  child: Icon(Icons.download)),
-                            ),
-                            title: Text("$music"),
-                            // leading: InkWell(
-                            //   onTap: () {
-                            //     ///Play Audio
-                            //     playAudio(audioFile); //play audio
-                            //     print(audioFile);
-                            //   },
-                            //   child: CircleAvatar(
-                            //       backgroundColor: MyColors().green,
-                            //       child: Icon(Icons.play_circle_outline)),
-                            // ),
-                          ),
+                                      GetLocalFilePath()
+                                          .moveFile(File(audioFile),
+                                              "/storage/emulated/0/VideoSaver/$music")
+                                          .then((value) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(SnackBar(
+                                          backgroundColor: MyColors().green,
+                                          content: Text(
+                                            "Music Saved to $value",
+                                            style: TextStyle(
+                                                color: MyColors().white),
+                                          ),
+                                        ));
+                                      });
+                                    },
+                                    child: CircleAvatar(
+                                        backgroundColor: MyColors().green,
+                                        child: Icon(Icons.download)),
+                                  ),
+                                  title: Text("$music"),
+                                  // leading: InkWell(
+                                  //   onTap: () {
+                                  //     ///Play Audio
+                                  //     playAudio(audioFile); //play audio
+                                  //     print(audioFile);
+                                  //   },
+                                  //   child: CircleAvatar(
+                                  //       backgroundColor: MyColors().green,
+                                  //       child: Icon(Icons.play_circle_outline)),
+                                  // ),
+                                ),
+                              ),
+                            );
+                          }),
                         ),
-                      );
-                    }),
+                      ),
+                    ],
                   ));
   }
 }

@@ -22,23 +22,20 @@ class App extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (BuildContext context) => IntertitialAds(),
-        ),
-
-        ChangeNotifierProvider(
           create: (BuildContext context) => VideoProvider(),
         ),
       ],
-      builder: (context, child){
+      builder: (context, child) {
         return MaterialApp(
-            home: SplashScreen(),
-            theme: ThemeData(
-                brightness: Brightness.light,
-                primaryColor: MyColors()
-                    .green, //Changing this will change the color of the TabBar
-                accentColor: MyColors().accent,
-                primaryColorDark: MyColors().dark),
-          );
+          debugShowCheckedModeBanner: false,
+          home: SplashScreen(),
+          theme: ThemeData(
+              brightness: Brightness.light,
+              primaryColor: MyColors()
+                  .green, //Changing this will change the color of the TabBar
+              accentColor: MyColors().accent,
+              primaryColorDark: MyColors().dark),
+        );
       },
     );
   }
