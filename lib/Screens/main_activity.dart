@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:video_saver/Screens/settings.dart';
 import 'package:video_saver/Styles/colors.dart';
 import 'BottomNavPages/wSaver.dart';
 import 'MusicDownloader/Music/music_home_page.dart';
@@ -39,7 +40,7 @@ class _MainActivityState extends State<MainActivity> {
   final List<Widget> _buildBody = [
     WSaverHome(),
     MMusicHome(), //NewsFeed
-    WSaverHome(), //Settings
+    SettingsPage(), //Settings
   ];
 
   final List<GButton> _tabs = [

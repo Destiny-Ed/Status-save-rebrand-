@@ -46,7 +46,7 @@ class GetLocalFilePath {
 
     List<String> path = directory!.path.split("/");
 
-    ///return this :       ///storage/emulated/0/Android/data/com.destinyed.video_saver/files
+    ///return this :       ///storage/emulated/0/Android/data/com.destinyed.statussaverpro/files
     ///So now I will have to split it to Android
 
     String storepath = "";
@@ -76,7 +76,7 @@ class GetLocalFilePath {
 
     List<String> path = directory!.path.split("/");
 
-    ///return this :       ///storage/emulated/0/Android/data/com.destinyed.video_saver/files
+    ///return this :       ///storage/emulated/0/Android/data/com.destinyed.statussaverpro/files
     ///So now I will have to split it to Android
 
     String storepath = "";

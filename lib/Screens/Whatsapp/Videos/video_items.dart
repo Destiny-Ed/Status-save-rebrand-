@@ -2,7 +2,9 @@ import 'dart:io';
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
+import 'package:video_saver/Constants/instertitialAdsView.dart';
 import 'package:video_saver/Styles/colors.dart';
 import 'package:video_saver/Utils/external_app_launcher.dart';
 
@@ -24,6 +26,7 @@ class VideoItems extends StatefulWidget {
 
 class _VideoItemsState extends State<VideoItems> {
   ChewieController? _chewieController;
+
   @override
   void initState() {
     super.initState();
@@ -42,6 +45,15 @@ class _VideoItemsState extends State<VideoItems> {
         );
       },
     );
+
+    ///Load Interstitial Ads
+    IntertitialAds().loadInterstitialAd();
+
+    ///
+    ///Show the ads after 3 seconds if page is still active
+    if (IntertitialAds().isInterstitialAdReady == true) {
+      IntertitialAds().interstitialAd.show();
+    }
   }
 
   @override

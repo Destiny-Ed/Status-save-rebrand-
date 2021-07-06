@@ -1,4 +1,4 @@
-package com.destinyed.video_saver
+package com.destinyed.statussaverpro
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
