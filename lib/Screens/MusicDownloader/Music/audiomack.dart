@@ -1,8 +1,8 @@
 import 'dart:io';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:video_saver/Constants/adsView.dart';
 import 'package:video_saver/Constants/file_path.dart';
@@ -24,20 +24,23 @@ class _AudioMarkHomePageState extends State<AudioMarkHomePage> {
   List<FileSystemEntity> file = [];
 
   //Audio Player
-  AudioPlayer audioPlayer = AudioPlayer();
+  AudioPlayer? audioPlayer;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _listofFiles();
+    setState(() {
+      audioPlayer = AudioPlayer();
+    });
   }
 
   playAudio(String path) async {
-    await audioPlayer.setFilePath(
-        "/storage/emulated/0/Boom Player/download/118902850/You Love Good - Phil.mp3");
+    // await audioPlayer.setFilePath(
+    //     "/storage/emulated/0/Boom Player/download/118902850/You Love Good - Phil.mp3");
 
-    await audioPlayer.play();
+    await audioPlayer!.play(path, isLocal: true);
   }
 
   // Make New Function

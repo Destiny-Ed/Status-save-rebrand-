@@ -32,8 +32,9 @@ class _WSaverHomeState extends State<WSaverHome>
     return Scaffold(
       appBar: AppBar(
         // shadowColor: MyColors().white,
+        backgroundColor: Colors.transparent,
         elevation: 0,
-        toolbarHeight: 60.0,
+        toolbarHeight: 10.0,
         bottom: TabBar(
           controller: _tabController,
           indicatorColor: Colors.transparent,
@@ -45,7 +46,7 @@ class _WSaverHomeState extends State<WSaverHome>
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
                   color: _currentIndex == index
-                      ? MyColors().white
+                      ? MyColors().grey
                       : MyColors().green),
               child: Text(
                 _tabText[index]!,

@@ -36,11 +36,12 @@ dependencies:
   video_player: ^2.1.6
   chewie: ^1.2.2
   video_thumbnail: ^0.3.3
-  just_audio: ^0.8.0
+  # just_audio: ^0.8.0
   google_mobile_ads: ^0.13.2
   provider: ^5.0.0
   share: ^2.0.4
   url_launcher: ^6.0.9
+  audioplayers: ^0.20.1
 
 dev_dependencies:
   flutter_test:

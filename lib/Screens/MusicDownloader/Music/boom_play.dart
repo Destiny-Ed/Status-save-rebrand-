@@ -1,17 +1,12 @@
 import 'dart:io';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:video_saver/Constants/adsView.dart';
-import 'package:video_saver/Constants/file_path.dart';
-import 'package:video_saver/Screens/Whatsapp/Images/image_view.dart';
 import 'package:video_saver/Styles/colors.dart';
 import 'package:video_saver/Utils/build_message_widget.dart';
 import 'package:video_saver/Utils/external_app_launcher.dart';
 import 'package:video_saver/Utils/getLocalPath.dart';
-import 'package:video_saver/Utils/page_router.dart';
 
 class BoomHomePage extends StatefulWidget {
   @override
@@ -24,20 +19,22 @@ class _BoomHomePageState extends State<BoomHomePage> {
   List<FileSystemEntity> file = [];
 
   //Audio Player
-  AudioPlayer audioPlayer = AudioPlayer();
+  AudioPlayer? audioPlayer;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _listofFiles();
+    setState(() {
+      audioPlayer = AudioPlayer();
+    });
   }
 
   playAudio(String path) async {
-    await audioPlayer.setFilePath(
-        "/storage/emulated/0/Boom Player/download/118902850/You Love Good - Phil.mp3");
+    // await audioPlayer.setFilePath(
+    //     "/storage/emulated/0/Boom Player/download/118902850/You Love Good - Phil.mp3");
 
-    await audioPlayer.play();
+    await audioPlayer!.play(path, isLocal: true);
   }
 
   // Make New Function
@@ -120,6 +117,9 @@ class _BoomHomePageState extends State<BoomHomePage> {
                                 .path
                                 .replaceAll(".bp", ".mp3")
                                 .replaceRange(0, 51, "");
+
+                            final s =
+                                file[index].path.replaceAll(".bp", ".mp3");
                             return Card(
                               elevation: 8.0,
                               shadowColor: MyColors().green,
@@ -151,16 +151,16 @@ class _BoomHomePageState extends State<BoomHomePage> {
                                         child: Icon(Icons.download)),
                                   ),
                                   title: Text("$music"),
-                                  // leading: InkWell(
-                                  //   onTap: () {
-                                  //     ///Play Audio
-                                  //     playAudio(audioFile); //play audio
-                                  //     print(audioFile);
-                                  //   },
-                                  //   child: CircleAvatar(
-                                  //       backgroundColor: MyColors().green,
-                                  //       child: Icon(Icons.play_circle_outline)),
-                                  // ),
+                                  leading: InkWell(
+                                    onTap: () {
+                                      ///Play Audio
+                                      playAudio(s); //play audio
+                                      print(s);
+                                    },
+                                    child: CircleAvatar(
+                                        backgroundColor: MyColors().green,
+                                        child: Icon(Icons.play_circle_outline)),
+                                  ),
                                 ),
                               ),
                             );

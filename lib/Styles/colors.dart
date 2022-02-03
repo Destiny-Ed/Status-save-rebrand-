@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class MyColors {
   final Color green = Color(0xff012E01);
   final Color white = Colors.white;
+  final Color grey = Colors.grey;
   final Color accent = Color(0xff012E01);
 
   final Color dark = Color(0xff012E01);

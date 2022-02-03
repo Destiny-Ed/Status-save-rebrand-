@@ -14,7 +14,7 @@ class SettingsPage extends StatelessWidget {
           ///Get Other Apps
           ///
           settingWidget("More Apps", Icon((Icons.apps)), () {
-            FlutterNativeAPI().launchExternalApp("app.bazarr");
+            FlutterNativeAPI().launchExternalApp("app.puzzle_bee");
           }),
 
           ///

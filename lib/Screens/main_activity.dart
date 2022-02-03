@@ -16,12 +16,6 @@ class _MainActivityState extends State<MainActivity> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: MyColors().green,
-        title: Text("Downloader"),
-        elevation: 0,
-      ),
       body: _buildBody[_currentIndex],
       bottomNavigationBar: GNav(
         tabs: _tabs,

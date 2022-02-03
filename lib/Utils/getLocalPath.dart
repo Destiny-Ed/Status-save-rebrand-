@@ -4,8 +4,9 @@ import 'package:path_provider/path_provider.dart';
 
 class GetLocalFilePath {
   Future<Directory> getLocalPath(bool isStatus) async {
-    final String fetch_path =
-        isStatus == true ? ".Statuses" : Uri.decodeFull("WhatsApp Stickers");
+    final String fetch_path = isStatus == true
+        ? ".Statuses"
+        : Uri.decodeFull("WhatsApp Business Stickers");
     Directory? directory = await getExternalStorageDirectory();
 
     List<String> path = directory!.path.split("/");
@@ -23,8 +24,11 @@ class GetLocalFilePath {
       }
     }
 
-    storepath =
-        storepath + "/Android/media/com.whatsapp/WhatsApp/Media/$fetch_path";
+    // storepath =
+    //     storepath + "/Android/media/com.whatsapp/WhatsApp/Media/$fetch_path";
+
+    storepath = storepath +
+        "/Android/media/com.whatsapp.w4b/WhatsApp Business/Media/$fetch_path";
 
     final newDirectory = Directory(storepath);
 

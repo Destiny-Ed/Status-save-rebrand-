@@ -63,12 +63,16 @@ class _VideoHomePageState extends State<VideoHomePage> {
             : videoProvider.getData.length < 1
                 ? buildMessageWidget(() {
                     ///Launch whatsapp to view users status
-                    FlutterNativeAPI().launchExternalApp("com.whatsapp");
+                    try {
+                      FlutterNativeAPI().launchExternalApp("com.whatsapp");
+                    } catch (_) {
+                      FlutterNativeAPI().launchExternalApp("com.whatsapp.wb4");
+                    }
                   }, "View Video", "You have zero viewed status",
                     Icon(Icons.hourglass_empty_rounded), context)
                 : Column(
                     children: [
-                      BannerAdsView(),
+                      // BannerAdsView(),
                       Expanded(
                         child: Container(
                           color: MyColors().green,
