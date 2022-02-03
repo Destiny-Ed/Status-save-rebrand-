@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_api/flutter_native_api.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
 import 'package:video_saver/Constants/adsView.dart';
@@ -24,18 +25,18 @@ class VideoHomePage extends StatefulWidget {
 }
 
 class _VideoHomePageState extends State<VideoHomePage> {
-  List<Map<String, dynamic>> data = []..reversed;
+  // List<Map<String, dynamic>> data = []..reversed;
 
   // Uint8List? thumb;
 
   @override
   void initState() {
-    print("This is the data $data");
-    FetchVideo().listofFiles().then((value) {
-      setState(() {
-        data.addAll(value);
-      });
-    });
+    // print("This is the data $data");
+    // FetchVideo().listofFiles().then((value) {
+    //   setState(() {
+    //     data.addAll(value);
+    //   });
+    // });
     super.initState();
   }
 
@@ -64,9 +65,9 @@ class _VideoHomePageState extends State<VideoHomePage> {
                 ? buildMessageWidget(() {
                     ///Launch whatsapp to view users status
                     try {
-                      FlutterNativeAPI().launchExternalApp("com.whatsapp");
+                      FlutterNativeApi.launchExternalApp("com.whatsapp");
                     } catch (_) {
-                      FlutterNativeAPI().launchExternalApp("com.whatsapp.wb4");
+                      FlutterNativeApi.launchExternalApp("com.whatsapp.wb4");
                     }
                   }, "View Video", "You have zero viewed status",
                     Icon(Icons.hourglass_empty_rounded), context)
@@ -87,8 +88,18 @@ class _VideoHomePageState extends State<VideoHomePage> {
                               final video =
                                   videoProvider.getData[index]["video_path"];
 
-                              final thumbNail =
-                                  videoProvider.getData[index]["thumbnail"];
+                              dynamic thumbNail;
+                              print("::::::::::: $thumbNail");
+
+                              // VideoThumbnail.thumbnailData(video: video)
+                              //     .then((v) {
+                              //   setState(() {
+                              //     thumbNail = v;
+                              //   });
+                              // });
+                              FlutterNativeApi().getVideoThumbNail(video).then((value) {
+                                print(";::::::::bbbbbb:::::::: $value");
+                              });
 
                               ///Return Widget
                               return InkWell(

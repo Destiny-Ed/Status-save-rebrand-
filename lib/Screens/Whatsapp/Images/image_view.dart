@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_native_api/flutter_native_api.dart';
+import 'package:flutter_native_api/flutter_native_api.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +35,7 @@ class _ImageViewPageState extends State<ImageViewPage> {
       ..addListener(() {
         setState(() {
           currentIndex = _controller!.page!.toInt();
-          print(currentIndex);
+          // print(currentIndex);
         });
       });
 
@@ -94,7 +96,8 @@ class _ImageViewPageState extends State<ImageViewPage> {
               heroTag: "btn2",
               onPressed: () {
                 ///Show the android print manager API
-                FlutterNativeAPI().printImage(
+
+                FlutterNativeApi.printImage(
                     widget.file![_controller!.page!.toInt()].path,
                     widget.file![_controller!.page!.toInt()].path);
               },
@@ -105,8 +108,8 @@ class _ImageViewPageState extends State<ImageViewPage> {
               heroTag: "btn3",
               onPressed: () {
                 ///Share Image to any Sharable Application
-                FlutterNativeAPI()
-                    .shareImage(widget.file![_controller!.page!.toInt()].path);
+                FlutterNativeApi
+                    .shareMultiple(widget.file![_controller!.page!.toInt()].path, "From Destiny Ed");
               },
               child: Icon(Icons.share),
             ),

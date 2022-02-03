@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_api/flutter_native_api.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_saver/Constants/adsView.dart';
 import 'package:video_saver/Styles/colors.dart';
@@ -14,7 +15,7 @@ class SettingsPage extends StatelessWidget {
           ///Get Other Apps
           ///
           settingWidget("More Apps", Icon((Icons.apps)), () {
-            FlutterNativeAPI().launchExternalApp("app.puzzle_bee");
+            FlutterNativeApi.launchExternalApp("app.puzzle_bee");
           }),
 
           ///
@@ -22,14 +23,14 @@ class SettingsPage extends StatelessWidget {
           settingWidget("Share App", Icon((Icons.share)), () {
             final String text =
                 "I use HaveIt to download whatsApp status, boomplay and audiomack songs without spending a dime  https://play.google.com/store/apps/details?id=app.saver";
-            Share.share(text);
+            FlutterNativeApi.shareText(text);
           }),
 
           ///Rate the app
           ///
           settingWidget("Rate HaveIt | Show some love", Icon((Icons.star_rate)),
               () async {
-            // FlutterNativeAPI()
+            // FlutterNativeApi()
             //     .launchExternalApp("app.saver");
             final url =
                 "https://play.google.com/store/apps/details?id=app.saver";

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:flutter_native_api/flutter_native_api.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:video_saver/Screens/Whatsapp/Videos/video_model.dart';
 import 'package:video_saver/Utils/external_app_launcher.dart';
@@ -28,7 +29,7 @@ class FetchVideo {
         for (var data in list) {
           final videoPath = data.path;
 
-          // final s = await FlutterNativeAPI().getVideoThumbNail(videoPath);
+          // final s = await FlutterNativeApi().getVideoThumbNail(videoPath);
 
           final thumbnail =
               await VideoThumbnail.thumbnailData(video: videoPath);
@@ -46,12 +47,13 @@ class FetchVideo {
         for (var data in list) {
           final videoPath = data.path;
 
-          // final s = await FlutterNativeAPI().getVideoThumbNail(videoPath);
+          final s = await FlutterNativeApi().getVideoThumbNail(videoPath);
+          print(":::::::::::::::::: $s");
 
-          final thumbnail =
-              await VideoThumbnail.thumbnailData(video: videoPath);
+          // final thumbnail =
+          //     await VideoThumbnail.thumbnailFile(video: videoPath);
 
-          final mapOfVideo = {"thumbnail": thumbnail, "video_path": videoPath};
+          final mapOfVideo = {"thumbnail": s, "video_path": videoPath};
 
           arrVideo.add(mapOfVideo);
         }

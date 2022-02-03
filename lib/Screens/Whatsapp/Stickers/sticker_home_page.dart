@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_api/flutter_native_api.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:video_saver/Constants/adsView.dart';
@@ -63,7 +64,7 @@ class _StickerHomePageState extends State<StickerHomePage> {
           : file.length < 1
               ? buildMessageWidget(() {
                   ///Launch whatsapp to view users status
-                  FlutterNativeAPI().launchExternalApp("com.whatsapp");
+                  FlutterNativeApi.launchExternalApp("com.whatsapp");
                 }, "View Image", "You have zero viewed status",
                   Icon(Icons.hourglass_empty_rounded), context)
               : Column(

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_api/flutter_native_api.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
@@ -91,7 +92,7 @@ class _VideoItemsState extends State<VideoItems> {
             FloatingActionButton(
               heroTag: "btn2",
               onPressed: () {
-                FlutterNativeAPI().shareVideo(widget.video);
+                FlutterNativeApi.shareVideo(widget.video);
               },
               child: Icon(Icons.share),
             ),

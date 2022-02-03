@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_api/flutter_native_api.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -84,7 +85,7 @@ class _AudioMarkHomePageState extends State<AudioMarkHomePage> {
           : file.length < 1
               ? buildMessageWidget(() {
                   ///Launch whatsapp to view users status
-                  FlutterNativeAPI().launchExternalApp("com.audiomack");
+                  FlutterNativeApi.launchExternalApp("com.audiomack");
                 }, "View audiomack", "You have zero audiomack music",
                   Icon(Icons.hourglass_empty_rounded), context)
               : Column(

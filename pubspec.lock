@@ -104,6 +104,15 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_native_api:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: main
+      resolved-ref: d7363a53011bc0e208edc1113398430b25fe8394
+      url: "https://github.com/Destiny-Ed/flutter_native_api.git"
+    source: git
+    version: "0.0.1"
   flutter_staggered_grid_view:
     dependency: "direct main"
     description:
@@ -475,7 +484,7 @@ packages:
       name: video_thumbnail
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.3"
+    version: "0.4.3"
   wakelock:
     dependency: transitive
     description:

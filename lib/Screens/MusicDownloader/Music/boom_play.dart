@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_api/flutter_native_api.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:video_saver/Constants/adsView.dart';
 import 'package:video_saver/Styles/colors.dart';
@@ -99,7 +100,7 @@ class _BoomHomePageState extends State<BoomHomePage> {
             : file.length < 1
                 ? buildMessageWidget(() {
                     ///Launch whatsapp to view users status
-                    FlutterNativeAPI()
+                    FlutterNativeApi
                         .launchExternalApp("com.afmobi.boomplayer");
                   }, "View boomplayer", "You have zero boom player music",
                     Icon(Icons.hourglass_empty_rounded), context)
