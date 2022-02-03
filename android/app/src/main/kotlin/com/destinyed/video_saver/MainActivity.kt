@@ -1,4 +1,4 @@
-package com.destinyed.statussaverpro
+package app.saver
 
 import android.content.ActivityNotFoundException
 import android.content.Intent

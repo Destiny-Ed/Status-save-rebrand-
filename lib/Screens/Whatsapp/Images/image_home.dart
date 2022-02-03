@@ -22,7 +22,6 @@ class _ImageHomePageState extends State<ImageHomePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _listofFiles();
   }

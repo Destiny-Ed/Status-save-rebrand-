@@ -21,7 +21,7 @@ class SettingsPage extends StatelessWidget {
           ///Share App
           settingWidget("Share App", Icon((Icons.share)), () {
             final String text =
-                "I use HaveIt to download whatsApp status, boomplay and audiomack songs without spending a dime  https://play.google.com/store/apps/details?id=com.destinyed.statussaverpro";
+                "I use HaveIt to download whatsApp status, boomplay and audiomack songs without spending a dime  https://play.google.com/store/apps/details?id=app.saver";
             Share.share(text);
           }),
 
@@ -30,9 +30,9 @@ class SettingsPage extends StatelessWidget {
           settingWidget("Rate HaveIt | Show some love", Icon((Icons.star_rate)),
               () async {
             // FlutterNativeAPI()
-            //     .launchExternalApp("com.destinyed.statussaverpro");
+            //     .launchExternalApp("app.saver");
             final url =
-                "https://play.google.com/store/apps/details?id=com.destinyed.statussaverpro";
+                "https://play.google.com/store/apps/details?id=app.saver";
             await canLaunch(url)
                 ? await launch(url)
                 : throw 'Could not launch $url';
