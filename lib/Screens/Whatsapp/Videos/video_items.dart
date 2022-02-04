@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 import 'package:video_saver/Constants/instertitialAdsView.dart';
 import 'package:video_saver/Styles/colors.dart';
-import 'package:video_saver/Utils/external_app_launcher.dart';
 
 class VideoItems extends StatefulWidget {
   final String? video;

@@ -3,7 +3,6 @@ import 'package:flutter_native_api/flutter_native_api.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_saver/Constants/adsView.dart';
 import 'package:video_saver/Styles/colors.dart';
-import 'package:video_saver/Utils/external_app_launcher.dart';
 import 'package:share/share.dart';
 
 class SettingsPage extends StatelessWidget {
