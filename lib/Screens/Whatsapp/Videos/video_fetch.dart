@@ -1,10 +1,8 @@
 import 'dart:io';
 import 'dart:typed_data';
-
 import 'package:flutter_native_api/flutter_native_api.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:video_saver/Screens/Whatsapp/Videos/video_model.dart';
-import 'package:video_saver/Utils/external_app_launcher.dart';
 import 'package:video_saver/Utils/getLocalPath.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 
@@ -26,6 +24,7 @@ class FetchVideo {
         var list =
             value.listSync().where((element) => element.path.endsWith(".mp4"));
 
+
         for (var data in list) {
           final videoPath = data.path;
 
@@ -46,14 +45,17 @@ class FetchVideo {
 
         for (var data in list) {
           final videoPath = data.path;
+          final path = data.absolute.path;
 
-          final s = await FlutterNativeApi().getVideoThumbNail(videoPath);
-          print(":::::::::::::::::: $s");
+          // print("Video path $videoPath");
+          // print("Absoulte $path");
 
-          // final thumbnail =
-          //     await VideoThumbnail.thumbnailFile(video: videoPath);
+          // final s = await FlutterNativeApi().getVideoThumbNail(path.toString());
 
-          final mapOfVideo = {"thumbnail": s, "video_path": videoPath};
+          final thumbnail =
+              await VideoThumbnail.thumbnailData(video: videoPath);
+
+          final mapOfVideo = {"thumbnail": thumbnail, "video_path": videoPath};
 
           arrVideo.add(mapOfVideo);
         }

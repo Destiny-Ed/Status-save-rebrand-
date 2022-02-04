@@ -11,8 +11,8 @@ import 'package:video_saver/Screens/Whatsapp/Videos/video_model.dart';
 import 'package:video_saver/Screens/Whatsapp/Videos/video_state_management.dart';
 import 'package:video_saver/Styles/colors.dart';
 import 'package:video_saver/Utils/build_message_widget.dart';
-import 'package:video_saver/Utils/external_app_launcher.dart';
 import 'package:video_saver/Utils/page_router.dart';
+import 'package:video_saver/Utils/shimmer_loader.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 
 class VideoHomePage extends StatefulWidget {
@@ -47,19 +47,10 @@ class _VideoHomePageState extends State<VideoHomePage> {
       videoProvider.fetchVideo();
       return Scaffold(
         body: videoProvider.getData.isEmpty
-            ? Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircularProgressIndicator(
-                      color: MyColors().green,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Text("Checking new status...")
-                  ],
-                ),
+            ? Column(
+                children: [
+                  shimmerLoader(),
+                ],
               )
             : videoProvider.getData.length < 1
                 ? buildMessageWidget(() {
@@ -87,19 +78,8 @@ class _VideoHomePageState extends State<VideoHomePage> {
                               // print(videoProvider.getData[index]);
                               final video =
                                   videoProvider.getData[index]["video_path"];
-
-                              dynamic thumbNail;
-                              print("::::::::::: $thumbNail");
-
-                              // VideoThumbnail.thumbnailData(video: video)
-                              //     .then((v) {
-                              //   setState(() {
-                              //     thumbNail = v;
-                              //   });
-                              // });
-                              FlutterNativeApi().getVideoThumbNail(video).then((value) {
-                                print(";::::::::bbbbbb:::::::: $value");
-                              });
+                              final thumbnail =
+                                  videoProvider.getData[index]['thumbnail'];
 
                               ///Return Widget
                               return InkWell(
@@ -125,12 +105,9 @@ class _VideoHomePageState extends State<VideoHomePage> {
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(15)),
-                                        child: thumbNail == null
+                                        child: thumbnail == null
                                             ? Text("Loading...")
-                                            : Image.memory(
-                                                thumbNail,
-                                                fit: BoxFit.cover,
-                                              ),
+                                            : Image.memory(thumbnail),
                                       ),
                                     ),
 

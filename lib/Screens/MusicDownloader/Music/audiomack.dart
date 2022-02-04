@@ -2,17 +2,11 @@ import 'dart:io';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_api/flutter_native_api.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:video_saver/Constants/adsView.dart';
-import 'package:video_saver/Constants/file_path.dart';
-import 'package:video_saver/Screens/Whatsapp/Images/image_view.dart';
 import 'package:video_saver/Styles/colors.dart';
 import 'package:video_saver/Utils/build_message_widget.dart';
-import 'package:video_saver/Utils/external_app_launcher.dart';
 import 'package:video_saver/Utils/getLocalPath.dart';
-import 'package:video_saver/Utils/page_router.dart';
 
 class AudioMarkHomePage extends StatefulWidget {
   @override
@@ -20,7 +14,7 @@ class AudioMarkHomePage extends StatefulWidget {
 }
 
 class _AudioMarkHomePageState extends State<AudioMarkHomePage> {
-  //Declare Globaly
+  //Declare Globally
   String? directory;
   List<FileSystemEntity> file = [];
 

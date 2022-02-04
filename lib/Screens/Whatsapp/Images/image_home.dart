@@ -7,7 +7,6 @@ import 'package:video_saver/Constants/adsView.dart';
 import 'package:video_saver/Screens/Whatsapp/Images/image_view.dart';
 import 'package:video_saver/Styles/colors.dart';
 import 'package:video_saver/Utils/build_message_widget.dart';
-import 'package:video_saver/Utils/external_app_launcher.dart';
 import 'package:video_saver/Utils/getLocalPath.dart';
 import 'package:video_saver/Utils/page_router.dart';
 
@@ -17,7 +16,7 @@ class ImageHomePage extends StatefulWidget {
 }
 
 class _ImageHomePageState extends State<ImageHomePage> {
-  //Declare Globaly
+  //Declare Globally
   String? directory;
   List<FileSystemEntity> file = []..reversed;
 

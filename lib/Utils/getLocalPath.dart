@@ -27,19 +27,51 @@ class GetLocalFilePath {
     // storepath =
     //     storepath + "/Android/media/com.whatsapp/WhatsApp/Media/$fetch_path";
 
-    storepath = storepath +
-        "/Android/media/com.whatsapp.w4b/WhatsApp Business/Media/$fetch_path";
+    if (fetch_path == '.Statuses') {
+      storepath = storepath +
+          "/Android/media/com.whatsapp.w4b/WhatsApp Business/Media/$fetch_path";
 
-    final newDirectory = Directory(storepath);
+      final newDirectory = Directory(storepath);
 
-    if (newDirectory.existsSync()) {
-      print("It does not exist");
-      return newDirectory;
+      if (newDirectory.existsSync()) {
+        print("It does not exist");
+        return newDirectory;
+      } else if (Directory("/storage/emulated/0/WhatsApp/Media/$fetch_path")
+          .existsSync()) {
+        final newStorePath = "/storage/emulated/0/WhatsApp/Media/$fetch_path";
+        print("It exists $newStorePath");
+        //Update the directory path to the new path
+        return Directory(newStorePath);
+      } else {
+        final newStorePath =
+            "/storage/emulated/0/Android/media/com.whatsapp/WhatsApp/Media/$fetch_path";
+        print("It exists $newStorePath");
+        //Update the directory path to the new path
+        return Directory(newStorePath);
+      }
     } else {
-      final newStorePath = "/storage/emulated/0/WhatsApp/Media/$fetch_path";
-      print("It exists $newStorePath");
-      //Update the directory path to the new path
-      return Directory(newStorePath);
+      storepath = storepath +
+          "/Android/media/com.whatsapp.w4b/WhatsApp Business/Media/$fetch_path";
+
+      final newDirectory = Directory(storepath);
+
+      if (newDirectory.existsSync()) {
+        print("It does not exist");
+        return newDirectory;
+      } else if (Directory(
+              "/storage/emulated/0/WhatsApp/Media/WhatsApp Stickers")
+          .existsSync()) {
+        final newStorePath = "/storage/emulated/0/WhatsApp/Media/$fetch_path";
+        print("It exists $newStorePath");
+        //Update the directory path to the new path
+        return Directory(newStorePath);
+      } else {
+        final newStorePath =
+            "/storage/emulated/0/Android/media/com.whatsapp/WhatsApp/Media/WhatsApp Stickers";
+        print("It exists $newStorePath");
+        //Update the directory path to the new path
+        return Directory(newStorePath);
+      }
     }
   }
 
