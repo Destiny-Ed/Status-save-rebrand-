@@ -13,15 +13,19 @@ class SettingsPage extends StatelessWidget {
         children: [
           ///Get Other Apps
           ///
-          settingWidget("More Apps", Icon((Icons.apps)), () {
-            FlutterNativeApi.launchExternalApp("app.puzzle_bee");
+          settingWidget("More Apps", Icon((Icons.apps)), () async {
+            // FlutterNativeApi.launchExternalApp("app.puzzle_bee");
+            final url = 'https://github.com/Destiny-Ed/Apps';
+             await canLaunch(url)
+                ? await launch(url)
+                : throw 'Could not launch $url';
           }),
 
           ///
           ///Share App
           settingWidget("Share App", Icon((Icons.share)), () {
             final String text =
-                "I use Wsaver to download whatsApp statuses, boomplay and audiomack songs without internet  https://play.google.com/store/apps/details?id=app.wsaver";
+                "I use Wsaver to download whatsApp statuses, boomplay and audiomack songs without internet  https://github.com/Destiny-Ed/Apps/blob/master/wSaver.apk";
             FlutterNativeApi.shareText(text);
           }),
 
@@ -32,7 +36,7 @@ class SettingsPage extends StatelessWidget {
             // FlutterNativeApi()
             //     .launchExternalApp("app.wsaver");
             final url =
-                "https://play.google.com/store/apps/details?id=app.wsaver";
+                "https://github.com/Destiny-Ed/Apps/blob/master/wSaver.apk";
             await canLaunch(url)
                 ? await launch(url)
                 : throw 'Could not launch $url';
