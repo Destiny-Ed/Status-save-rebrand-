@@ -1,4 +1,4 @@
-package app.saver
+package app.wsaver
 
 import android.content.ActivityNotFoundException
 import android.content.Intent

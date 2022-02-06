@@ -1,3 +1,4 @@
+import 'package:firebase_in_app_messaging/firebase_in_app_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:video_saver/Screens/settings.dart';
@@ -12,6 +13,10 @@ class MainActivity extends StatefulWidget {
 
 class _MainActivityState extends State<MainActivity> {
   int _currentIndex = 0;
+
+
+  FirebaseInAppMessaging fiam = FirebaseInAppMessaging.instance;
+
 
   @override
   Widget build(BuildContext context) {

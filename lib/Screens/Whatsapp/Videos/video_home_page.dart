@@ -29,6 +29,8 @@ class _VideoHomePageState extends State<VideoHomePage> {
 
   // Uint8List? thumb;
 
+  bool _fetched = false;
+
   @override
   void initState() {
     // print("This is the data $data");
@@ -44,7 +46,12 @@ class _VideoHomePageState extends State<VideoHomePage> {
   Widget build(BuildContext context) {
     ///Get video
     return Consumer<VideoProvider>(builder: (context, videoProvider, child) {
-      videoProvider.fetchVideo();
+      if (_fetched == false) {
+        videoProvider.fetchVideo();
+        Future.delayed(const Duration(seconds: 2), () {
+          _fetched = true;
+        });
+      }
       return Scaffold(
         body: videoProvider.getData.isEmpty
             ? Column(

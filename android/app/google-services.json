@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "658834866970",
+    "project_id": "cognitto-ac85a",
+    "storage_bucket": "cognitto-ac85a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:658834866970:android:be567d547ef21c70f262a3",
+        "android_client_info": {
+          "package_name": "app.wsaver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "658834866970-nea56sons0u6nhbhlnl98q28k2ogbal5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaXFwJ872HpHGp2x-EE8S4_xANnAphSI0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "658834866970-nea56sons0u6nhbhlnl98q28k2ogbal5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
