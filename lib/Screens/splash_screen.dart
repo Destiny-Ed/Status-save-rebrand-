@@ -10,6 +10,20 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  FirebaseMessaging c = FirebaseMessaging.instance;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getToken();
+  }
+
+  void getToken() async {
+    final token = await c.getToken();
+    print("token $token");
+  }
+
   @override
   Widget build(BuildContext context) {
     Future.delayed(const Duration(seconds: 2), () async {

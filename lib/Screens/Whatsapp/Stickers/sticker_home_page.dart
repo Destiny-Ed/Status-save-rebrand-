@@ -18,7 +18,7 @@ class StickerHomePage extends StatefulWidget {
 class _StickerHomePageState extends State<StickerHomePage> {
   //Declare Globaly
   String? directory;
-  List<FileSystemEntity> file = []..reversed;
+  List<FileSystemEntity> file = [];
 
   @override
   void initState() {
@@ -57,13 +57,19 @@ class _StickerHomePageState extends State<StickerHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: file.isEmpty
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
+          ? buildMessageWidget(() {
+              ///Launch whatsapp to view users status
+              FlutterNativeApi.launchExternalApp("com.whatsapp");
+            }, "Loading...", "Make sure you have whatsapp installed",
+              const CircularProgressIndicator(), context)
           : file.length < 1
               ? buildMessageWidget(() {
                   ///Launch whatsapp to view users status
-                  FlutterNativeApi.launchExternalApp("com.whatsapp");
+                  try {
+                    FlutterNativeApi.launchExternalApp("com.whatsapp");
+                  } catch (_) {
+                    FlutterNativeApi.launchExternalApp("com.whatsapp.wb4");
+                  }
                 }, "View Image", "You have zero viewed status",
                   Icon(Icons.hourglass_empty_rounded), context)
               : Column(
@@ -79,6 +85,7 @@ class _StickerHomePageState extends State<StickerHomePage> {
                           mainAxisSpacing: 12,
                           itemCount: file.length,
                           itemBuilder: (context, index) {
+                            file.shuffle();
                             final image = file[index].path;
 
                             ///Return Widget

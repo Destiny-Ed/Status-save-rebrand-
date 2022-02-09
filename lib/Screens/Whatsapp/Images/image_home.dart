@@ -18,7 +18,7 @@ class ImageHomePage extends StatefulWidget {
 class _ImageHomePageState extends State<ImageHomePage> {
   //Declare Globally
   String? directory;
-  List<FileSystemEntity> file = []..reversed;
+  List<FileSystemEntity> file = [];
 
   @override
   void initState() {
@@ -35,7 +35,7 @@ class _ImageHomePageState extends State<ImageHomePage> {
       directory = await GetLocalFilePath().getLocalPath(true).then((value) {
         if (mounted) {
           setState(() {
-            file.addAll(value.listSync().where((element) =>
+            file.addAll(value.listSync().reversed.where((element) =>
                 element.path.endsWith(".jpg"))); //Add Files to fileList
           });
         }
@@ -44,7 +44,7 @@ class _ImageHomePageState extends State<ImageHomePage> {
       directory = await GetLocalFilePath().getLocalPath(true).then((value) {
         if (mounted) {
           setState(() {
-            file.addAll(value.listSync().where((element) =>
+            file.addAll(value.listSync().reversed.where((element) =>
                 element.path.endsWith(".jpg"))); //Add Files to fileList
           });
         }
@@ -56,13 +56,19 @@ class _ImageHomePageState extends State<ImageHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: file.isEmpty
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
+          ? buildMessageWidget(() {
+              ///Launch whatsapp to view users status
+              FlutterNativeApi.launchExternalApp("com.whatsapp");
+            }, "Loading...", "Make sure you have whatsapp installed",
+              const CircularProgressIndicator(), context)
           : file.length < 1
               ? buildMessageWidget(() {
                   ///Launch whatsapp to view users status
-                  FlutterNativeApi.launchExternalApp("com.whatsapp");
+                  try {
+                    FlutterNativeApi.launchExternalApp("com.whatsapp");
+                  } catch (_) {
+                    FlutterNativeApi.launchExternalApp("com.whatsapp.wb4");
+                  }
                 }, "View Image", "You have zero viewed status",
                   Icon(Icons.hourglass_empty_rounded), context)
               : Column(

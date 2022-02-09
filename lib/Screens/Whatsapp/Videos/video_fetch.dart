@@ -21,9 +21,10 @@ class FetchVideo {
         //         element.path.endsWith(".mp4"))); //Add Files to fileList
         //   });
         // }
-        var list =
-            value.listSync().where((element) => element.path.endsWith(".mp4"));
-
+        var list = value
+            .listSync()
+            .reversed
+            .where((element) => element.path.endsWith(".mp4"));
 
         for (var data in list) {
           final videoPath = data.path;
@@ -40,8 +41,10 @@ class FetchVideo {
       });
     } else {
       await GetLocalFilePath().getLocalPath(true).then((value) async {
-        var list =
-            value.listSync().where((element) => element.path.endsWith(".mp4"));
+        var list = value
+            .listSync()
+            .reversed
+            .where((element) => element.path.endsWith(".mp4"));
 
         for (var data in list) {
           final videoPath = data.path;

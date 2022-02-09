@@ -15,11 +15,11 @@ class _MainActivityState extends State<MainActivity> {
   int _currentIndex = 0;
 
 
-  FirebaseInAppMessaging fiam = FirebaseInAppMessaging.instance;
 
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       body: _buildBody[_currentIndex],
       bottomNavigationBar: GNav(
