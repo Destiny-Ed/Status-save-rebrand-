@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_api/flutter_native_api.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
+import 'package:thumbnails/thumbnails.dart';
 import 'package:video_saver/Constants/adsView.dart';
 import 'package:video_saver/Screens/Whatsapp/Videos/video_fetch.dart';
 import 'package:video_saver/Screens/Whatsapp/Videos/video_items.dart';
@@ -40,6 +41,18 @@ class _VideoHomePageState extends State<VideoHomePage> {
     //   });
     // });
     super.initState();
+  }
+
+  Future<String> videoThumbNail(videoPathUrl) async {
+    //await Future.delayed(Duration(milliseconds: 500));
+    String thumb = await Thumbnails.getThumbnail(
+        videoFile: videoPathUrl,
+        imageType:
+            ThumbFormat.PNG, //this image will store in created folderpath
+        quality: 10);
+
+    print("kfkdfdf $thumb");
+    return thumb;
   }
 
   @override
@@ -85,8 +98,8 @@ class _VideoHomePageState extends State<VideoHomePage> {
                               // print(videoProvider.getData[index]);
                               final video =
                                   videoProvider.getData[index]["video_path"];
-                              final thumbnail =
-                                  videoProvider.getData[index]['thumbnail'];
+                              // final thumbnail =
+                              //     videoProvider.getData[index]['thumbnail'];
 
                               ///Return Widget
                               return InkWell(
@@ -109,13 +122,33 @@ class _VideoHomePageState extends State<VideoHomePage> {
                                           color: Colors.transparent,
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(15))),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(15)),
-                                        child: thumbnail == null
-                                            ? Text("Loading...")
-                                            : Image.memory(thumbnail),
-                                      ),
+                                      child: FutureBuilder(
+                                          future: videoThumbNail(video),
+                                          builder: (context,
+                                              AsyncSnapshot<String> snapshot) {
+                                            if (snapshot.connectionState ==
+                                                ConnectionState.done) {
+                                              if (snapshot.hasData) {
+                                                return ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(15)),
+                                                  child: Image.file(
+                                                      File(snapshot.data!),),
+                                                );
+                                              } else {
+                                                return Center(
+                                                  child:
+                                                      CircularProgressIndicator(),
+                                                );
+                                              }
+                                            } else {
+                                              return Center(
+                                                child:
+                                                    CircularProgressIndicator(),
+                                              );
+                                            }
+                                          }),
                                     ),
 
                                     ///Show Play Icon on Video thumbnail

@@ -1,8 +1,4 @@
-import 'dart:io';
-import 'dart:typed_data';
-import 'package:flutter_native_api/flutter_native_api.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:video_saver/Screens/Whatsapp/Videos/video_model.dart';
 import 'package:video_saver/Utils/getLocalPath.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 
@@ -31,10 +27,10 @@ class FetchVideo {
 
           // final s = await FlutterNativeApi().getVideoThumbNail(videoPath);
 
-          final thumbnail =
-              await VideoThumbnail.thumbnailData(video: videoPath);
+          // final thumbnail =
+          //     await VideoThumbnail.thumbnailData(video: videoPath);
 
-          final mapOfVideo = {"thumbnail": thumbnail, "video_path": videoPath};
+          final mapOfVideo = {"video_path": videoPath};
 
           arrVideo.add(mapOfVideo);
         }
@@ -55,10 +51,10 @@ class FetchVideo {
 
           // final s = await FlutterNativeApi().getVideoThumbNail(path.toString());
 
-          final thumbnail =
-              await VideoThumbnail.thumbnailData(video: videoPath);
+          // final thumbnail =
+          //     await VideoThumbnail.thumbnailData(video: videoPath);
 
-          final mapOfVideo = {"thumbnail": thumbnail, "video_path": videoPath};
+          final mapOfVideo = {"video_path": videoPath};
 
           arrVideo.add(mapOfVideo);
         }
