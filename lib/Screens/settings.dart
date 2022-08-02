@@ -16,7 +16,7 @@ class SettingsPage extends StatelessWidget {
           settingWidget("More Apps", Icon((Icons.apps)), () async {
             // FlutterNativeApi.launchExternalApp("app.puzzle_bee");
             final url = 'https://github.com/Destiny-Ed/Apps';
-             await canLaunch(url)
+            await canLaunch(url)
                 ? await launch(url)
                 : throw 'Could not launch $url';
           }),
@@ -34,7 +34,7 @@ class SettingsPage extends StatelessWidget {
           settingWidget("Rate HaveIt | Show some love", Icon((Icons.star_rate)),
               () async {
             // FlutterNativeApi()
-            //     .launchExternalApp("app.wsaver");
+            //     .launchExternalApp("app.save");
             final url =
                 "https://github.com/Destiny-Ed/Apps/blob/master/wSaver.apk";
             await canLaunch(url)

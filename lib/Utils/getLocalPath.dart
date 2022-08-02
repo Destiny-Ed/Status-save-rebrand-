@@ -82,7 +82,7 @@ class GetLocalFilePath {
 
     List<String> path = directory!.path.split("/");
 
-    ///return this :       ///storage/emulated/0/Android/data/app.wsaver/files
+    ///return this :       ///storage/emulated/0/Android/data/app.save/files
     ///So now I will have to split it to Android
 
     String storepath = "";
@@ -112,7 +112,7 @@ class GetLocalFilePath {
 
     List<String> path = directory!.path.split("/");
 
-    ///return this :       ///storage/emulated/0/Android/data/app.wsaver/files
+    ///return this :       ///storage/emulated/0/Android/data/app.save/files
     ///So now I will have to split it to Android
 
     String storepath = "";
